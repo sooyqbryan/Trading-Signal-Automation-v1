@@ -118,5 +118,5 @@ These run offline in about 0.03 seconds and check the reliability rules directly
   itself and survives reboots.
 
 ## More detail
-- [`BUGS.md`](Trading-Signal-Automation/BUGS.md) — every bug found while building, and how they were caught.
-- [`evidence`](Trading-Signal-Automation/evidence/run_log.txt) — proof of the live 3-day+ run
+- [`BUGS.md`](Trading-Signal-Automation-v1/Trading-Signal-Automation/BUGS.md) — every bug found while building, and how they were caught.
+- [`evidence`](Trading-Signal-Automation-v1/Trading-Signal-Automation/evidence/run_log.txt) — proof of the live 3-day+ run
