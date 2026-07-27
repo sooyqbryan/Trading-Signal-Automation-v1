@@ -16,18 +16,25 @@ Telegram confirms the message actually arrived.
 
 ## Set it up
 
-Most of that time is just signing up for two free accounts. The program itself runs immediately.
+Most of the time is just signing up for two free accounts. The program itself runs in seconds.
 
 ### Before you start
-- **Python 3.9 or newer.** Check with `python3 --version` in a terminal.
-  (No Python? Get it at [python.org/downloads](https://www.python.org/downloads/).)
-- The **Telegram** app on your phone or desktop.
+- **Python 3.9 or newer.** No Python? Install it from [python.org/downloads](https://www.python.org/downloads/).
+  On **Windows**, tick **"Add Python to PATH"** on the first install screen.
+- The **Telegram** app (phone or desktop).
+- **Open a terminal:** on **macOS** open the **Terminal** app; on **Windows** open **PowerShell**.
+- **Go into the project folder:** type `cd ` (with a space), drag the project folder onto the
+  terminal window, and press Enter.
 
 ### Step 1 — Install
-Open a terminal, move into this project's folder, then run:
 ```bash
-python3 -m venv .venv                       # create a private space for the libraries
-.venv/bin/pip install -r requirements.txt   # install what the program needs
+# macOS / Linux:
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+
+# Windows:
+python -m venv .venv
+.venv\Scripts\pip install -r requirements.txt
 ```
 
 ### Step 2 — Get your three keys
@@ -38,22 +45,34 @@ python3 -m venv .venv                       # create a private space for the lib
 | 3 | **taapi.io secret** | Sign up free at [taapi.io](https://taapi.io) and copy the "API Key" from your dashboard. |
 
 ### Step 3 — Save your keys
-```bash
-cp .env.example .env
+In the project folder, create a new file named exactly **`.env`** and put these three lines in it:
 ```
-Open the new `.env` file in any text editor and paste your three values in, then save.
-This file stays on your machine and is never shared or uploaded.
+TELEGRAM_BOT_TOKEN=paste_your_bot_token_here
+TELEGRAM_CHAT_ID=paste_your_chat_id_here
+TAAPI_SECRET=paste_your_taapi_key_here
+```
+Replace each value with yours and save. This file stays on your machine — it is never shared or uploaded.
+*(An example file, `.env.example`, is also included — you can copy it instead: `cp .env.example .env` on macOS, `copy .env.example .env` on Windows.)*
 
 ### Step 4 — Check everything works
 ```bash
-.venv/bin/python check_setup.py   # sends a test Telegram message AND prints the latest BTC candles
+# macOS / Linux:
+.venv/bin/python check_setup.py
+
+# Windows:
+.venv\Scripts\python check_setup.py
 ```
-If you get the Telegram message and see prices in the terminal, you're ready.
+If a test message appears in Telegram and prices print in the terminal, you're ready.
 
 ### Step 5 — Run it
 ```bash
-.venv/bin/python main.py                         # run ONCE (just sets a starting point, no alert)
-.venv/bin/python main.py --loop --interval 300   # run continuously (how it runs on the server)
+# macOS / Linux:
+.venv/bin/python main.py                          # run ONCE (sets a starting point, sends no alert)
+.venv/bin/python main.py --loop --interval 300    # run continuously (how it runs on the server)
+
+# Windows:
+.venv\Scripts\python main.py
+.venv\Scripts\python main.py --loop --interval 300
 ```
 The very first run only records where the two averages are right now and sends **nothing** —
 that's correct. Real alerts start on the next actual crossover.
@@ -74,7 +93,11 @@ that's correct. Real alerts start on the next actual crossover.
 
 ## Run the tests
 ```bash
+# macOS / Linux:
 .venv/bin/python -m unittest test_reliability -v
+
+# Windows:
+.venv\Scripts\python -m unittest test_reliability -v
 ```
 These run offline in about 0.03 seconds and check the reliability rules directly.
 
